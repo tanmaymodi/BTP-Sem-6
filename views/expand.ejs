@@ -1,0 +1,37 @@
+<style>
+    #sbody img {
+        max-width: 100%;
+        max-height: 100vh;
+    }
+</style>
+
+<!-- <div class="btn btn-warning">
+    <a href="/blog/add"> Add blog</a>
+</div> -->
+
+
+
+<div class="container" style="margin: 50px auto;background-color: rgb(253, 240, 220);padding:20px">
+
+
+    <h1>
+        <%= blog["title"] %>
+    </h1>
+
+    <div id="blog-status"> By :
+        <%= blog["username"] %>
+
+            ,
+            <% var x= "just now" ;var y=blog.did;if( time - y >= 525600){ x= (parseInt((time - y )/ 525600))+" years ago"; } else if( time - y >=43200){ x= (parseInt((time - y )/ 43200))+" months ago" } else if( time - y >=10800){ x= (parseInt((time - y )/ 10800))+" weeks ago" }else if( time - y >=1440){ x= (parseInt((time - y )/ 1440))+" days ago" } else if( time - y >=60){ x= (parseInt((time - y )/ 60))+" hours ago" }else if( time - y >=0){ x= (parseInt((time - y )))+" min ago" }   %>
+                <% if (x[0] == '0') { x = "Just now" }%>
+
+                    <%= x %>
+    </div>
+    <div id="description" style="margin: 5px">
+        <%= blog.description %>
+    </div>
+    <div style="border-left: 5px grey solid; padding:20px; margin-top: 10px; margin-bottom: 10px; margin-left: 1px;" id="body">
+        <%- blog.sanitizedHtml %>
+    </div>
+
+</div>

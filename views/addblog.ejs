@@ -1,0 +1,40 @@
+<div class="form-group">
+    <label for="title">Title</label>
+    <input class="form-control" type="text" name="title" id="title" placeholder="Enter Title" />
+</div>
+<div class="form-group">
+    <label for="description">Description</label>
+    <input class="form-control" type="text" name="description" id="description" placeholder="Enter Description" />
+</div>
+<div class="form-group">
+    <label for="body">Body</label>
+    <textarea name="editor" class="form-control" id="body" rows="8"></textarea>
+</div>
+<button class="btn btn-primary" onclick="addblog()">Submit</button>
+
+
+
+<script>
+    var addblog = () => {
+        var data = {
+            title: document.getElementById('title').value,
+            description: document.getElementById('description').value,
+            body: document.getElementById('body').value
+        };
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url: '/blog/add',
+            data: data,
+            success: (res) => {
+                console.log("BLog added", res);
+                if (res.success) {
+                    window.location.replace('/blog');
+                }
+            },
+            error: (err) => {
+                console.log("Error", err);
+            }
+        })
+    }
+</script>

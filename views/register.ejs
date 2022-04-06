@@ -1,0 +1,74 @@
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" placeholder="Enter Username" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input class="form-control" type="text" name="fullname" id="fullname" placeholder="Enter Full Name" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" />
+    </div>
+    <div class="form-group">
+        <label for="key">Key</label>
+        <input class="form-control" type="password" name="key" id="key" placeholder="Enter Key" />
+    </div>
+</form>
+<button class="btn btn-primary" onclick="register()" style="text-decoration: none;">Register</button>
+<br /> Don't have key? Contact Us now!
+<br />
+<div id="status"></div>
+
+</div>
+
+
+<script>
+    var register = () => {
+        var data = {
+            'email': document.getElementById("email").value,
+            'password': document.getElementById("password").value,
+            'username': document.getElementById("username").value,
+            'fullname': document.getElementById("fullname").value,
+            'key': document.getElementById("key").value
+        };
+        console.log(data);
+
+        var status = $("#status");
+
+        $.ajax({
+            type: "POST",
+            url: "/auth/register",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+
+            dataType: 'json',
+            success: (res) => {
+                console.log("success", res);
+
+                if (res.success) {
+
+                    status.html(res.msg);
+                    status.css("color", "green");
+                } else {
+                    status.html(res.msg);
+                    status.css("color", "red");
+                }
+
+
+
+            },
+            error: (err) => {
+                console.log("err", err.responseJSON.msg);
+                status.html(err.responseJSON.msg);
+                status.css("color", "red");
+
+            }
+        })
+    }
+</script>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studyturn Admin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!-- <script src="js/checkauth.js"></script> -->
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<style>
+    #main {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <form>
+            <div class="form-group">
+                <label for="email">Username</label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="Enter Username" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password" />
+            </div>
+        </form>
+        <button class="btn btn-primary" onclick="submit()" style="text-decoration: none;">Login</button>
+        <br /> Or
+        <br />
+        <a href="/auth/register">Register Here</a>
+        <br />
+        <div id="status"></div>
+
+    </div>
+</body>
+
+<script>
+    var submit = () => {
+
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        var data = {
+            'username': username,
+            'password': password
+        };
+        console.log(data);
+        var status = $('#status');
+
+
+        $.ajax({
+            type: "POST",
+            url: "/auth/login",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+
+            dataType: 'json',
+            success: (res) => {
+
+                console.log("success", res);
+                // localStorage.setItem('access_token', res.access_token);
+
+                status.html("You are authorised");
+                status.css("color", "green");
+
+                window.location.replace('/dashboard');
+
+            },
+            error: (err) => {
+                console.log("err", err);
+                status.html(err.responseJSON.msg);
+                status.css('color', 'red');
+            }
+        });
+    }
+
+
+    // $(document).ready(async() => {
+    //     // console.debug($.cookie("access_token"));
+    //     var mainHtml = $("#main").html();
+
+    //     $("#main").html("Loading...");
+
+    //     var token = await localStorage.getItem('access_token');
+    //     $.ajax({
+    //         type: "POST",
+    //         url: '/checkauth',
+    //         beforeSend: function(request) {
+    //             request.setRequestHeader("Authorization", token);
+    //         },
+    //         success: (res) => {
+
+    //             console.log("check success:", res);
+    //             if (res.success) {
+    //                 console.log("ajac");
+    //                 $.ajax({
+    //                     type: "GET",
+    //                     url: "/dashboard",
+    //                     beforeSend: function(request) {
+    //                         request.setRequestHeader("Authorization", token);
+    //                     },
+    //                 });
+
+    //             } else {
+    //                 $("#main").html(mainHtml);
+    //             }
+
+    //         },
+    //         error: (err) => {
+    //             $("#main").html(mainHtml);
+    //             console.log("err: ", err);
+    //             return false;
+    //         }
+    //     });
+    // });
+</script>
+
+</html>
