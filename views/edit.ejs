@@ -1,27 +1,68 @@
 <div class="container">
-    <h1> Edit blog </h1>
+    <h1> Buying Dashboard</h1>
     <div class="row">
 
         <form action="/blog/edit/<%=x%>" method="POST">
 
             <div class="form-group">
                 <label for="user">Title:</label>
-                <input class="form-control" type="text" name="title" value="<%= blog.title %>" id="title">
+                <input class="form-control" type="text" name="title" value="<%= blog.title %>" id="title" disabled>
             </div>
             <div class="form-group">
-                <label for="user">By:</label>
+                <label for="user">Seller:</label>
                 <input class="form-control" type="text" name="username" placeholder="<%= blog.username %>" id="username"
                     disabled>
             </div>
 
             <div class="form-group">
                 <label for="user">Description:</label>
-                <input class="form-control" type="text" name="description" value="<%= blog.title %>" id="description">
+                <input class="form-control" type="text" name="description" value="<%= blog.title %>" id="description"
+                    disabled>
             </div>
 
             <div class="form-group">
-                <textarea class="form-control" rows="10" cols="100" name="body" id="body"
-                    placeholder=""><%=blog.body%></textarea></div>
+                <label for="user">Address:</label>
+                <input class="form-control" type="text" name="body" value="<%= blog.body %>" id="body" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="user">Seller's Pricee:</label>
+                <input class="form-control" type="text" name="price" value="<%= blog.price %>" id="price" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="user">Status:</label>
+                <input class="form-control" type="text" name="status" value="<%= blog.status %>" id="status">
+            </div>
+
+
+            <div class="form-group">
+                <label for="user">Your Bid Price:</label>
+                <input class="form-control" type="text" name="dealprice" value="<%= blog.dealprice %>" id="dealprice">
+            </div>
+            <div class="form-group">
+                <label for="user">Step 1:</label>
+                <input class="form-control" type="text" name="step1" value="<%= blog.step1 %>" id="step1"
+                    <% if( blog.status == false ) {  %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+                <label for="user">Step 2:</label>
+                <input class="form-control" type="text" name="step2" value="<%= blog.step2 %>" id="step2"
+                    <% if( blog.status == false || blog.step1 == false ) {  %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+                <label for="user">Step 3:</label>
+                <input class="form-control" type="text" name="step3" value="<%= blog.step3 %>" id="step3"
+                    <% if( blog.status == false || blog.step2 == false ) {  %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+                <label for="user">Step 4:</label>
+                <input class="form-control" type="text" name="step4" value="<%= blog.step4 %>" id="step4"
+                    <% if( blog.status == false || blog.step3 == false ) {  %> disabled <% } %>>
+            </div>
+
+
+
             <a class="btn btn-secondary" href="/"> Cancel</a>
             <button class="btn btn-primary" type="submit"> Submit</button>
 

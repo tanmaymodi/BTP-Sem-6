@@ -1,7 +1,13 @@
 <br />
 <br />
 <h3>Welcome
-    <%= user.username %>
+    <%= user.fullname %>
 </h3>
+<img src="<%= user.avatar %> " alt="profile pic">
+<h4> Username: <%= user.username %> </h4>
+<h4> Email: <%= user.email %> </h4>
+<h4> ETH ID: <%= user.auth %> </h4>
+<h4> <%= user.fullname %> </h4>
+
 
 </html>

@@ -3,11 +3,11 @@
         max-width: 100%;
         max-height: 100vh;
     }
-    
+
     div a {
         color: white;
     }
-    
+
     .auth {
         background: rgb(182, 178, 178);
         padding: 5px;
@@ -17,12 +17,12 @@
         color: rgb(94, 94, 94);
         transition: all 0.25s;
     }
-    
+
     .auth:hover {
         box-shadow: 0px 0px 7px grey;
         color: black;
     }
-    
+
     .blogc {
         border: 2px solid rgb(255, 223, 174);
         border-radius: 10px;
@@ -30,57 +30,57 @@
         box-shadow: 0px 3px 4px rgb(202, 202, 202);
         transition: all 0.3s;
     }
-    
+
     .blogc:hover {
         background-color: rgb(255, 251, 246);
         box-shadow: 0px 5px 8px rgb(202, 202, 202);
     }
-    
+
     .content {
         max-height: 500px;
         overflow: hidden;
         overflow-y: scroll;
     }
-    
-     ::-webkit-scrollbar {
+
+    ::-webkit-scrollbar {
         width: 7px;
     }
-    
-     ::-webkit-scrollbar-track {
+
+    ::-webkit-scrollbar-track {
         box-shadow: inset 0 0 5px grey;
     }
-    
-     ::-webkit-scrollbar-thumb {
+
+    ::-webkit-scrollbar-thumb {
         background: #888;
         transition: all 0.2s;
     }
-    
-     ::-webkit-scrollbar-thumb:hover {
+
+    ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
-    
+
     .logout {
         transition: all 0.2s;
         border: 0px;
     }
-    
+
     .logout:hover {
         background: grey;
         color: white;
         text-decoration: bold;
         border-radius: 5px;
     }
-    
+
     .hh {
         overflow: hidden;
         margin: 10px auto;
         width: 80%;
     }
-    
+
     .btn-delpost {
         transition: all 0.2s;
     }
-    
+
     .btn-delpost:hover {
         transform: scale(1.3);
     }
@@ -88,56 +88,59 @@
 
 <div class="container">
     <div class="container d-flex h-10">
-        <div class="row justify-content-center align-self-center" style="background-color: rgb(0, 110, 255); padding: 12px 15px 12px 15px; border-radius: 50%;">
-            <a style="color: blanchedalmond; font-size: 20px;" href="/blog/add" title="Add new Blog"><i class="fa fa-plus"></i></a>
+        <div class="row justify-content-center align-self-center"
+            style="background-color: rgb(0, 110, 255); padding: 12px 15px 12px 15px; border-radius: 50%;">
+            <a style="color: blanchedalmond; font-size: 20px;" href="/blog/add" title="Add new Blog"><i
+                    class="fa fa-plus"></i></a>
         </div>
     </div>
 
     <div id="allblogs">
         <% if (blogs.length == 0) { %>
-            <div class="text-center" style="margin-top: 50px; color: rgb(163, 163, 163); font-size: 30px;">
-                No Blogs to Show
+        <div class="text-center" style="margin-top: 50px; color: rgb(163, 163, 163); font-size: 30px;">
+            No Blogs to Show
+        </div>
+        <% } else { %>
+        <%  for(var i = 0; i < blogs.length; i++) { %>
+        <div class="container blogc" style="margin: 50px auto;padding:20px">
+            <div class="row">
+                <div class="col" style="text-align: left; font-weight: 500; font-size: 30px;">
+
+                    <%= blogs[i]["title"] %>
+
+
+                </div>
+                <% if (cuser == blogs[i]["username"]) {%>
+                <div class="col" style="text-align: right;">
+
+                    <button id="<%= blogs[i]['mid']%>" onclick="remove(this)" type="submit" class="btn btn-delpost"><i
+                            class="fa fa-trash-o" style="font-size:18px;color:red"></i></button>
+
+                </div>
+                <% } %>
             </div>
-            <% } else { %>
-                <%  for(var i = 0; i < blogs.length; i++) { %>
-                    <div class="container blogc" style="margin: 50px auto;padding:20px">
-                        <div class="row">
-                            <div class="col" style="text-align: left; font-weight: 500; font-size: 30px;">
+            <div id="blog-status"> By :
+                <%= blogs[i]["username"] %>
+                ,
+                <% var x= "just now" ;if( time - blogs[i].did >= 525600){ x= (parseInt((time - blogs[i].did )/ 525600))+" years ago"; } else if( time - blogs[i].did >=43200){ x= (parseInt((time - blogs[i].did )/ 43200))+" months ago" } else if( time - blogs[i].did >=10800){ x= (parseInt((time - blogs[i].did )/ 10800))+" weeks ago" }else if( time - blogs[i].did >=1440){ x= (parseInt((time - blogs[i].did )/ 1440))+" days ago" } else if( time - blogs[i].did >=60){ x= (parseInt((time - blogs[i].did )/ 60))+" hours ago" }else if( time - blogs[i].did >=0){ x= (parseInt((time - blogs[i].did )))+" min ago" }   %>
+                <% if (x[0] == '0') { x = "Just now" }%>
 
-                                <%= blogs[i]["title"] %>
+                <%= x %>
+            </div>
+            <div id="description" style="margin: 5px">
+                <%- blogs[i].description %>
+            </div>
 
+            <div class="btn btn-warning">
+                <a href="/blog/edit/<%=blogs[i]['mid']%>">EDIT</a>
+            </div>
 
-                            </div>
-                            <% if (cuser == blogs[i]["username"]) {%>
-                                <div class="col" style="text-align: right;">
+            <div class="btn btn-warning">
+                <a href="/blog/expand/<%=blogs[i]['mid']%>">READ MORE</a>
+            </div>
 
-                                    <button id="<%= blogs[i]['mid']%>" onclick="remove(this)" type="submit" class="btn btn-delpost"><i class="fa fa-trash-o" style="font-size:18px;color:red"></i></button>
-
-                                </div>
-                                <% } %>
-                        </div>
-                        <div id="blog-status"> By :
-                            <%= blogs[i]["username"] %>
-                                ,
-                                <% var x= "just now" ;if( time - blogs[i].did >= 525600){ x= (parseInt((time - blogs[i].did )/ 525600))+" years ago"; } else if( time - blogs[i].did >=43200){ x= (parseInt((time - blogs[i].did )/ 43200))+" months ago" } else if( time - blogs[i].did >=10800){ x= (parseInt((time - blogs[i].did )/ 10800))+" weeks ago" }else if( time - blogs[i].did >=1440){ x= (parseInt((time - blogs[i].did )/ 1440))+" days ago" } else if( time - blogs[i].did >=60){ x= (parseInt((time - blogs[i].did )/ 60))+" hours ago" }else if( time - blogs[i].did >=0){ x= (parseInt((time - blogs[i].did )))+" min ago" }   %>
-                                    <% if (x[0] == '0') { x = "Just now" }%>
-
-                                        <%= x %>
-                        </div>
-                        <div id="description" style="margin: 5px">
-                            <%- blogs[i].description %>
-                        </div>
-                        <% if (cuser == blogs[i]["username"]) {%>
-                            <div class="btn btn-warning">
-                                <a href="/blog/edit/<%=blogs[i]['mid']%>">EDIT</a>
-                            </div>
-                            <% } %>
-                                <div class="btn btn-warning">
-                                    <a href="/blog/expand/<%=blogs[i]['mid']%>">READ MORE</a>
-                                </div>
-
-                    </div>
-                    <%  }   %>
+        </div>
+        <%  }   %>
 
 
     </div>
@@ -151,8 +154,8 @@
 
             <li class="page-item active">
                 <span class="page-link">
-          <%= page%>
-          <span class="sr-only">(current)</span>
+                    <%= page%>
+                    <span class="sr-only">(current)</span>
                 </span>
             </li>
             <li class="page-item">
@@ -165,7 +168,7 @@
     <div class="page-info text-center" style="color: rgb(163, 163, 163); font-size: 15px;">
         Showing Page
         <%= page %> of
-            <%= last %>
+        <%= last %>
     </div>
     <%  }   %>
 </div>

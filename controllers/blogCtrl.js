@@ -16,6 +16,9 @@ var blogCtrl = {
                 username: req.user.username,
                 description: req.body.description,
                 body: req.body.body,
+                price: req.body.price,
+                images: req.body.images,
+                doc: req.body.doc,
                 mid: req.user.username + "-" + (parseInt(Date.now() / 60000).toString()),
                 sanitizedHtml: shtml,
                 did: parseInt(Date.now() / 60000)
@@ -36,12 +39,18 @@ var blogCtrl = {
             }
             console.log("edit blog post -- ", req.params.id);
             var blog = await Blog.findOne({mid: req.params.id});
-            if(req.user.username !== blog.username){
-                return res.json({success: false, msg: "Access Denied"});
+            if(req.user.username === blog.username){
+                return res.json({success: false, msg: "Can't buy own property"});
             }
-            var shtml = domPurify.sanitize(marked.parse(req.body.body));
-            await Blog.updateOne({mid: req.params.id}, {$set: {title: req.body.title, description: req.body.description, body: req.body.body, sanitizedHtml: shtml}});
-
+            //var shtml = domPurify.sanitize(marked.parse(req.body.body));
+            var deal = false;
+            if(req.body.step4) {
+                deal = true;
+                console.log("step 4 = ", req.body.step4, deal);
+            }
+            console.log("step 4 = ", req.body.step4, deal);
+            console.log(req.body.buyer, req.body.dealprice,req.body.status, req.body.step1)
+            await Blog.updateOne({mid: req.params.id}, {$set: {buyer:req.body.buyer, dealprice: req.body.dealprice, status:req.body.status,step1: req.body.step1, step2: req.body.step2,step3: req.body.step3,step4: req.body.step4, deal: deal}});
             console.log("Blog updated");
             return res.redirect('/blog');
         } catch (err) {

@@ -20,7 +20,8 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
-    Address: {
+    //address
+    body: {
         type: String,
         required: true
     },
@@ -31,7 +32,37 @@ const blogSchema = new Schema({
     images:{
         type:String
     },
+    doc:{
+        type:String
+    },
+    
     sanitizedHtml: String,
+    buyer: String,
+    dealprice: String,
+    status: {
+        type: Boolean,
+        default: false
+    },
+    step1:{
+        type: Boolean,
+        default: false
+    },
+    step2:{
+        type: Boolean,
+        default: false
+    },
+    step3:{
+        type: Boolean,
+        default: false
+    },
+    step4:{
+        type: Boolean,
+        default: false
+    },
+    deal: {
+        type: Boolean,
+        default: false
+    },
     mid: String,
     did: Number,
 });

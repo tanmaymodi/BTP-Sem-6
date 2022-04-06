@@ -9,7 +9,7 @@ const authCtrl = {
                 return res.redirect('/dashboard');
             }
             console.log("register");
-            const { fullname, username, email, password, key } = req.body
+            const { fullname, username, email, password, auth,key } = req.body
             console.log(key, process.env.key);
             var secret = process.env.key; 
             if (key !== secret) {
@@ -35,6 +35,7 @@ const authCtrl = {
                 username: newUserName,
                 email,
                 password: passwordHash,
+                auth
 
             })
 

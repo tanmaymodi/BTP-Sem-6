@@ -7,8 +7,20 @@
     <input class="form-control" type="text" name="description" id="description" placeholder="Enter Description" />
 </div>
 <div class="form-group">
-    <label for="body">Body</label>
-    <textarea name="editor" class="form-control" id="body" rows="8"></textarea>
+    <label for="body">Address</label>
+    <input class="form-control" type="text" name="body" id="body" placeholder="Enter Address" />
+</div>
+<div class="form-group">
+    <label for="body">Price</label>
+    <input class="form-control" type="text" name="price" id="price" placeholder="Enter Price" />
+</div>
+<div class="form-group">
+    <label for="body">Property Image Link</label>
+    <input class="form-control" type="text" name="images" id="images" placeholder="Enter Image Link" />
+</div>
+<div class="form-group">
+    <label for="body">Property Document Link</label>
+    <input class="form-control" type="text" name="doc" id="doc" placeholder="Enter Document Link" />
 </div>
 <button class="btn btn-primary" onclick="addblog()">Submit</button>
 
@@ -19,7 +31,10 @@
         var data = {
             title: document.getElementById('title').value,
             description: document.getElementById('description').value,
-            body: document.getElementById('body').value
+            body: document.getElementById('body').value,
+            price: document.getElementById('price').value,
+            images: document.getElementById('images').value,
+            doc: document.getElementById('doc').value
         };
         console.log(data);
         $.ajax({
