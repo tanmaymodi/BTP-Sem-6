@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <a href="/blog/add"> <button> Sell Your Property</button></a>
+    </div>
+
+    <hr>
+    <h2>properties on sale</h2>
+    <hr>
+
+
+    <h2>your properties on Sale</h2>
+
+    <% for ( let i=0 ; i < sell.length ; i++ ) { %>
+    <div class="card">
+        <img src="<%= sell[i].images %> " alt="Avatar" style="width:100%">
+        <div class="container">
+            <h4>Title: <b><%= sell[i].title %></b></h4>
+            <p>Description: <b><%= sell[i].description %></b></p>
+            <h5>Price: <b> <%= sell[i].price %></b></h5>
+        </div>
+    </div>
+    <% } %>
+
+
+</div>

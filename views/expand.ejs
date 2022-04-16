@@ -50,10 +50,15 @@
         <img style="max-width: 100%; max-height: 100%;" src="<%= blog.doc %> " alt="property image">
     </div>
     <hr>
-
+    <div class="btn btn-warning">
+        <a href="/blog/edit/<%=blog['mid']%>">EDIT</a>
+    </div>
+    <hr>
     <div>
         <% if ( blog.status == true || blog.step1 == true ) { %>
         <br>
+        <br>
+        buyer's username: <%= blog.buyer %>
         <br>
         buyer's bid price: <%= blog.dealprice %>
         <br><br>

@@ -71,7 +71,7 @@ router.route("/edit/:id")
         var y = req.params.id;
         var blog = await Blog.findOne({ mid: req.params.id });
         if (req.user) {
-            res.render("edit", { blog: blog, x: y, isAuthenticated: req.user ? true : false });
+            res.render("edit", { blog: blog, x: y, isAuthenticated: req.user ? true : false,user:req.user });
         } else {
             res.redirect("/auth/login");
         }

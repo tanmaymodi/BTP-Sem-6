@@ -37,7 +37,10 @@ const blogSchema = new Schema({
     },
     
     sanitizedHtml: String,
-    buyer: String,
+    buyer: {
+        type: String,
+        default: "None"
+    },
     dealprice: String,
     status: {
         type: Boolean,
