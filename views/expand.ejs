@@ -3,6 +3,84 @@
         max-width: 100%;
         max-height: 100vh;
     }
+
+    .stepper-wrapper {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .stepper-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+
+        @media (max-width: 768px) {
+            font-size: 12px;
+        }
+    }
+
+    .stepper-item::before {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #ccc;
+        width: 100%;
+        top: 20px;
+        left: -50%;
+        z-index: 2;
+    }
+
+    .stepper-item::after {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #ccc;
+        width: 100%;
+        top: 20px;
+        left: 50%;
+        z-index: 2;
+    }
+
+    .stepper-item .step-counter {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #ccc;
+        margin-bottom: 6px;
+    }
+
+    .stepper-item.active {
+        font-weight: bold;
+    }
+
+    .stepper-item.completed .step-counter {
+        background-color: #4bb543;
+    }
+
+    .stepper-item.completed::after {
+        position: absolute;
+        content: "";
+        border-bottom: 2px solid #4bb543;
+        width: 100%;
+        top: 20px;
+        left: 50%;
+        z-index: 3;
+    }
+
+    .stepper-item:first-child::before {
+        content: none;
+    }
+
+    .stepper-item:last-child::after {
+        content: none;
+    }
 </style>
 
 <!-- <div class="btn btn-warning">
@@ -55,47 +133,89 @@
     </div>
     <hr>
     <div>
+
+        <p>
+            <strong>Status:</strong>
+            <strong><%= blog.message %> </strong>
+        </p>
+
+        <hr>
         <% if ( blog.status == true || blog.step1 == true ) { %>
+
+        <div class="stepper-wrapper">
+            <div
+                class="stepper-item   <% if ( blog.step1 == false && blog.status == true ) { %> active <% } else if ( blog.step1 == true ) { %> completed <% } %>  ">
+                <div class="step-counter">1</div>
+                <div class="step-name">Buyer's Offer Acception </div>
+            </div>
+            <div
+                class="stepper-item <% if ( blog.step2 == false && blog.step1 == true ) { %> active <% } else if ( blog.step2 == true ) { %> completed <% } %> ">
+                <div class="step-counter">2</div>
+                <div class="step-name">Verifying Seller's Property<br>(Done by Org.)</div>
+            </div>
+            <div
+                class="stepper-item <% if ( blog.step3 == false && blog.step2 == true ) { %> active <% } else if ( blog.step3 == true ) { %> completed <% } %> ">
+                <div class="step-counter">3</div>
+                <div class="step-name">Funds Checking in Buyer's Account<br>(Done by Org.)</div>
+            </div>
+            <div
+                class="stepper-item <% if ( blog.step4 == false && blog.step3 == true ) { %> active <% } else if ( blog.step4 == true ) { %> completed <% } %> ">
+                <div class="step-counter">4</div>
+                <div class="step-name">Transfering Ownership to Buyer and Offered Amount to Seller</div>
+            </div>
+        </div>
+
+
+
+
+
+        <br><br><br>
+        <h5>Transaction Updates</h5>
+        <strong>Buyer's Username:</strong> <%= blog.buyer %>
         <br>
+        <strong>Buyer's Offered Price:</strong> <%= blog.dealprice %>
         <br>
-        buyer's username: <%= blog.buyer %>
-        <br>
-        buyer's bid price: <%= blog.dealprice %>
-        <br><br>
-        <% if ( blog.status == false && blog.step1 == true ) { %>
-        <p>Buyer's offer rejected</p>
+        <% if ( blog.step1 == false ) { %>
+        <p>
+            <strong>Buyer's Offer</strong> <span style="color: red;">Rejected</span>
+        </p>
         <% } else { %>
-        <p>buyer's offer accepted</p>
+        <p>
+            <strong>Buyer's Offer</strong> <span style="color: green;">Accepted</span>
+        </p>
         <% } %>
-        <br><br>
-        step1:
-        <% if ( blog.step1 == true ) { %>
-        <p>completed</p>
-        <% } else { %>
-        <p>Not completed</p>
-        <% } %>
-        <br><br>
-        step2:
+
+
+
+
+        <strong>Status of Verifying Property Details via Org. Records</strong>
         <% if ( blog.step2 == true ) { %>
-        <p>completed</p>
+        <p style="color: green;">Verified</p>
         <% } else { %>
-        <p>Not completed</p>
+        <p style="color: red;">Pending</p>
         <% } %>
-        <br><br>
-        step3:
+
+
+
+        <strong>Checking Sufficient Funds in Buyer's Account</strong>
         <% if ( blog.step3 == true ) { %>
-        <p>completed</p>
+        <p style="color: green;">Verified</p>
         <% } else { %>
-        <p>Not completed</p>
+        <p style="color: red;">Pending</p>
         <% } %>
-        <br><br>
-        step4:
+
+
+
+        <strong>Transfering Ownership and Offered Amount</strong>
         <% if ( blog.step4 == true ) { %>
-        <p>completed</p>
+        <p style="color: green;">Verified</p>
         <% } else { %>
-        <p>Not completed</p>
+        <p style="color: red;">Pending</p>
         <% } %>
-        <br><br>
+
+
+
+
         Deal:
         <% if ( blog.deal == false ) { %>
         <p>Pending</p>

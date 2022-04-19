@@ -35,22 +35,82 @@
                 <input class="form-control" type="text" name="buyer" value="<%= user.username %>" id="buyer" disabled>
             </div>
 
-            <div class="form-group">
-                <label for="user">Status:</label>
-                <input class="form-control" type="text" name="status" value="<%= blog.status %>" id="status">
+            <div <% if ( ( blog.username == user.username || blog.buyer != "None" )  ) { %> style="display: none;"
+                <% } %>>
+                <div class="form-group">
+                    <label for="user">Do you want to buy this property?:</label><br>
+                    <select name="status" id="status" default>
+                        <option value="<%= blog.status %>" selected hidden><%= blog.status %></option>
+                        <option value="true" selected>Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user">Your Price:</label>
+                    <input class="form-control" type="text" name="dealprice" value="<%= blog.dealprice %>"
+                        id="dealprice">
+                </div>
+            </div>
+
+            <div <% if ( blog.username != user.username ) { %> style="display: none;" <% } %>>
+                <div class="form-group">
+                    <label for="user">Accept/Reject buyer's offer:</label><br>
+                    <select name="step1" id="step1" <% if ( blog.status == false ) { %> disabled <% } %>>
+                        <option value="<%= blog.step1 %>" selected hidden><% if ( blog.step1 == true ) { %> Accept
+                            <% } else { %> Reject <% } %> </option>
+                        <option value="true">Accept</option>
+                        <option value="false">Reject</option>
+                    </select>
+                </div>
             </div>
 
 
-            <div class="form-group">
-                <label for="user">Your Bid Price:</label>
-                <input class="form-control" type="text" name="dealprice" value="<%= blog.dealprice %>" id="dealprice">
+
+
+            <div style="display: none;">
+                <div class="form-group">
+                    <label for="user">Property verfication step (done by org.):</label><br>
+                    <select name="step2" id="step2" <% if( blog.step1 == false ) {  %> disabled <% } %>>
+                        <option value="<%= blog.step2 %>" selected hidden><% if ( blog.step2 == true ) { %> Accept
+                            <% } else { %> Reject <% } %> </option>
+                        <option value="true">Accept</option>
+                        <option value="false">Reject</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user">Fund checking in buyer's account (done by org.):</label><br>
+                    <select name="step3" id="step3" <% if( blog.step2 == false ) {  %> disabled <% } %>>
+                        <option value="<%= blog.step3 %>" selected hidden><% if ( blog.step3 == true ) { %> Accept
+                            <% } else { %> Reject <% } %> </option>
+                        <option value="true">Accept</option>
+                        <option value="false">Reject</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="user">Step 1:</label>
-                <input class="form-control" type="text" name="step1" value="<%= blog.step1 %>" id="step1"
-                    <% if( blog.status == false ) {  %> disabled <% } %>>
+
+            <div <% if ( blog.buyer != user.username ) { %> style="display: none;" <% } %>>
+                <div class="form-group">
+                    <label for="user">Confirm Final Order:</label><br>
+                    <select name="step4" id="step4" <% if( blog.step3 == false ) {  %> disabled <% } %>>
+                        <option value="<%= blog.step4 %>" selected hidden><% if ( blog.step4 == true ) { %> Accept
+                            <% } else { %> Reject <% } %> </option>
+                        <option value="true">Accept</option>
+                        <option value="false">Reject</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group">
+
+
+
+            <div style="display: none;">
+                <div class="form-group">
+                    <label for="user">Message:</label>
+                    <input class="form-control" type="text" name="message" value="<%= blog.message %>" id="message"
+                        disabled>
+                </div>
+            </div>
+
+            <!-- <div class="form-group">
                 <label for="user">Step 2:</label>
                 <input class="form-control" type="text" name="step2" value="<%= blog.step2 %>" id="step2"
                     <% if( blog.status == false || blog.step1 == false ) {  %> disabled <% } %>>
@@ -64,7 +124,7 @@
                 <label for="user">Step 4:</label>
                 <input class="form-control" type="text" name="step4" value="<%= blog.step4 %>" id="step4"
                     <% if( blog.status == false || blog.step3 == false ) {  %> disabled <% } %>>
-            </div>
+            </div> -->
 
 
 

@@ -66,6 +66,10 @@ const blogSchema = new Schema({
         type: Boolean,
         default: false
     },
+    message:{
+        type: String,
+        default: "No new messages"
+    },
     mid: String,
     did: Number,
 });

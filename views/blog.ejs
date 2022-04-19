@@ -119,7 +119,8 @@
                 </div>
                 <% } %>
             </div>
-            <div id="blog-status"> By :
+
+            <div id="blog-status" style="text-align: right;"> By :
                 <%= blogs[i]["username"] %>
                 ,
                 <% var x= "just now" ;if( time - blogs[i].did >= 525600){ x= (parseInt((time - blogs[i].did )/ 525600))+" years ago"; } else if( time - blogs[i].did >=43200){ x= (parseInt((time - blogs[i].did )/ 43200))+" months ago" } else if( time - blogs[i].did >=10800){ x= (parseInt((time - blogs[i].did )/ 10800))+" weeks ago" }else if( time - blogs[i].did >=1440){ x= (parseInt((time - blogs[i].did )/ 1440))+" days ago" } else if( time - blogs[i].did >=60){ x= (parseInt((time - blogs[i].did )/ 60))+" hours ago" }else if( time - blogs[i].did >=0){ x= (parseInt((time - blogs[i].did )))+" min ago" }   %>
@@ -127,13 +128,19 @@
 
                 <%= x %>
             </div>
+            <hr>
+            <div>
+                <img src="<%= blogs[i]['images'] %>" alt=""
+                    style="height: 300px; width: auto; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+            <hr>
             <div id="description" style="margin: 5px">
-                <%- blogs[i].description %>
+                <span style="color: rgb(136, 135, 135);">Description:</span> <%- blogs[i].description %>
             </div>
 
-            <div class="btn btn-warning">
+            <!-- <div class="btn btn-warning">
                 <a href="/blog/edit/<%=blogs[i]['mid']%>">EDIT</a>
-            </div>
+            </div> -->
 
             <div class="btn btn-warning">
                 <a href="/blog/expand/<%=blogs[i]['mid']%>">READ MORE</a>

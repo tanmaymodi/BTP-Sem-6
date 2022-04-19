@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     auth:{
         type:String
     },
+    balance:{
+        type: Number,
+        default: 200000
+    },
     avatar: {
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
