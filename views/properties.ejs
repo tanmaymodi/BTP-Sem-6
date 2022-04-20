@@ -10,16 +10,33 @@
 
     <h2>your properties on Sale</h2>
 
-    <% for ( let i=0 ; i < sell.length ; i++ ) { %>
-    <div class="card">
-        <img src="<%= sell[i].images %> " alt="Avatar" style="width:100%">
-        <div class="container">
-            <h4>Title: <b><%= sell[i].title %></b></h4>
-            <p>Description: <b><%= sell[i].description %></b></p>
-            <h5>Price: <b> <%= sell[i].price %></b></h5>
+
+
+
+    <div class="container">
+        <div class="row">
+            <% for ( let i=0 ; i < sell.length ; i++ ) { %>
+
+
+            <div class="col-md-3 ">
+                <div class="card p-4" style="width: 18rem;">
+                    <img class="card-img-top" src="<%= sell[i].images %>" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= sell[i].title %></h5>
+                        <p class="card-text"><%= sell[i].description %></p>
+                        <p class="card-text"> <%= sell[i].price %></p>
+                        <a href="/blog/expand/<%= sell[i].mid %>" class="btn btn-primary">More</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <% } %>
+
         </div>
     </div>
-    <% } %>
+
+
 
 
 </div>

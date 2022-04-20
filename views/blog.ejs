@@ -129,9 +129,16 @@
                 <%= x %>
             </div>
             <hr>
-            <div>
-                <img src="<%= blogs[i]['images'] %>" alt=""
-                    style="height: 300px; width: auto; display: block; margin-left: auto; margin-right: auto;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div>
+                        <img src="<%= blogs[i]['images'] %>" alt=""
+                            style="height: 300px; width: auto; display: block; margin-left: auto; margin-right: auto;">
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin: auto;">
+                    Price: <strong>₹ <%= blogs[i]['price'] %> </strong>
+                </div>
             </div>
             <hr>
             <div id="description" style="margin: 5px">
@@ -142,8 +149,8 @@
                 <a href="/blog/edit/<%=blogs[i]['mid']%>">EDIT</a>
             </div> -->
 
-            <div class="btn btn-warning">
-                <a href="/blog/expand/<%=blogs[i]['mid']%>">READ MORE</a>
+            <div class="btn btn-warning" style="justify-content: left;">
+                <a href="/blog/expand/<%=blogs[i]['mid']%>">MORE</a>
             </div>
 
         </div>

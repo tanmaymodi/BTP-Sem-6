@@ -7,7 +7,7 @@
     .stepper-wrapper {
         margin-top: auto;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         margin-bottom: 20px;
     }
 
@@ -16,6 +16,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
         flex: 1;
 
         @media (max-width: 768px) {
@@ -81,6 +82,15 @@
     .stepper-item:last-child::after {
         content: none;
     }
+
+
+
+    table,
+    tr,
+    td {
+        padding: 5px;
+        border: 1px solid black;
+    }
 </style>
 
 <!-- <div class="btn btn-warning">
@@ -106,7 +116,7 @@
         <%= x %>
     </div>
     <div id="description" style="margin: 5px">
-        <%= blog.description %>
+        Description: <strong> <%= blog.description %></strong>
     </div>
     <div style="border-left: 5px grey solid; padding:20px; margin-top: 10px; margin-bottom: 10px; margin-left: 1px;"
         id="body">
@@ -115,12 +125,15 @@
     </div>
 
 
+
     <div>
-        <p>Price: <%= blog.price  %> </p>
+        <h6 style="text-align: center;">Price: <strong><%= blog.price  %></strong> </h6>
     </div>
-    <div>
+    <hr>
+    <div style="text-align: center;">
         Property Image: <br>
-        <img style="max-width: 100%; max-height: 100%;" src="<%= blog.images %> " alt="property image">
+        <img style="max-width: 100%; max-height: 100%; margin-right: auto; margin-left: auto; display: block;"
+            src="<%= blog.images %> " alt="property image">
     </div>
     <br>
     <div>
@@ -129,7 +142,7 @@
     </div>
     <hr>
     <div class="btn btn-warning">
-        <a href="/blog/edit/<%=blog['mid']%>">EDIT</a>
+        <a style="color: white;" href="/blog/edit/<%=blog['mid']%>">BUY</a>
     </div>
     <hr>
     <div>
@@ -170,59 +183,141 @@
 
 
         <br><br><br>
-        <h5>Transaction Updates</h5>
-        <strong>Buyer's Username:</strong> <%= blog.buyer %>
-        <br>
-        <strong>Buyer's Offered Price:</strong> <%= blog.dealprice %>
-        <br>
-        <% if ( blog.step1 == false ) { %>
-        <p>
-            <strong>Buyer's Offer</strong> <span style="color: red;">Rejected</span>
-        </p>
-        <% } else { %>
-        <p>
-            <strong>Buyer's Offer</strong> <span style="color: green;">Accepted</span>
-        </p>
-        <% } %>
+        <div>
+
+            <h5>Transaction Updates</h5>
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <strong>Buyer's Username</strong>
+                        <hr>
+                        <strong>Buyer's Offered Price</strong>
+                        <hr>
+                        <strong>Buyer's Offer</strong>
+                        <hr>
+                        <strong>Status of Verifying Property Details via Org. Records</strong>
+                        <hr>
+                        <strong>Checking Sufficient Funds in Buyer's Account</strong>
+                        <hr>
+                        <strong>Transfering Ownership and Offered Amount</strong>
+                        <hr>
+                        <strong>Deal</strong>
+                        <hr>
+                    </div>
+                    <div class="col-md-2">
+
+                        <%= blog.buyer %>
+                        <hr>
+                        <%= blog.dealprice %>
+                        <hr>
+
+
+                        <% if ( blog.step1 == false ) { %>
+                        <span>
+                            <span style="color: red;">Rejected</span>
+                        </span>
+                        <% } else { %>
+                        <span>
+                            <span style="color: green;">Accepted</span>
+                        </span>
+                        <% } %>
+                        <hr>
+
+                        <% if ( blog.step2 == true ) { %>
+                        <span style="color: green;">Verified</span>
+                        <% } else { %>
+                        <span style="color: red;">Pending</span>
+                        <% } %>
+                        <hr>
+
+                        <% if ( blog.step3 == true ) { %>
+                        <span style="color: green;">Verified</span>
+                        <% } else { %>
+                        <span style="color: red;">Pending</span>
+                        <% } %>
+                        <hr>
+
+                        <% if ( blog.step4 == true ) { %>
+                        <span style="color: green;">Verified</span>
+                        <% } else { %>
+                        <span style="color: red;">Pending</span>
+                        <% } %>
+                        <hr>
 
 
 
-
-        <strong>Status of Verifying Property Details via Org. Records</strong>
-        <% if ( blog.step2 == true ) { %>
-        <p style="color: green;">Verified</p>
-        <% } else { %>
-        <p style="color: red;">Pending</p>
-        <% } %>
-
-
-
-        <strong>Checking Sufficient Funds in Buyer's Account</strong>
-        <% if ( blog.step3 == true ) { %>
-        <p style="color: green;">Verified</p>
-        <% } else { %>
-        <p style="color: red;">Pending</p>
-        <% } %>
+                        <% if ( blog.deal == false ) { %>
+                        <span style="color: red;">Pending</span>
+                        <% } else { %>
+                        <span style="color: green;">Done</span>
+                        <% } %>
+                        <hr>
+                    </div>
+                    <div class="col-md"></div>
 
 
-
-        <strong>Transfering Ownership and Offered Amount</strong>
-        <% if ( blog.step4 == true ) { %>
-        <p style="color: green;">Verified</p>
-        <% } else { %>
-        <p style="color: red;">Pending</p>
-        <% } %>
+                </div>
+            </div>
 
 
+            <!-- <strong>Buyer's Username:</strong> <%= blog.buyer %>
+                <br>
+                <strong>Buyer's Offered Price:</strong> <%= blog.dealprice %>
+                <br>
+
+                <strong>Buyer's Offer</strong>
+                <% if ( blog.step1 == false ) { %>
+                <span>
+                    <span style="color: red;">Rejected</span>
+                </span>
+                <% } else { %>
+                <span>
+                    <span style="color: green;">Accepted</span>
+                </span>
+                <% } %>
 
 
-        Deal:
-        <% if ( blog.deal == false ) { %>
-        <p>Pending</p>
-        <% } else { %>
-        <p>Done</p>
-        <% } %>
-        <% } %>
+                <br>
+
+                <strong>Status of Verifying Property Details via Org. Records</strong>
+                <% if ( blog.step2 == true ) { %>
+                <span style="color: green;">Verified</span>
+                <% } else { %>
+                <span style="color: red;">Pending</span>
+                <% } %>
+
+                <br>
+
+                <strong>Checking Sufficient Funds in Buyer's Account</strong>
+                <% if ( blog.step3 == true ) { %>
+                <span style="color: green;">Verified</span>
+                <% } else { %>
+                <span style="color: red;">Pending</span>
+                <% } %>
+
+
+                <br>
+                <strong>Transfering Ownership and Offered Amount</strong>
+                <% if ( blog.step4 == true ) { %>
+                <span style="color: green;">Verified</span>
+                <% } else { %>
+                <span style="color: red;">Pending</span>
+                <% } %>
+
+
+                <br>
+
+                <strong>Deal:</strong>
+                <% if ( blog.deal == false ) { %>
+                <span style="color: red;">Pending</span>
+                <% } else { %>
+                <span style="color: green;">Done</span>
+                <% } %>
+                <% } %> -->
+
+        </div>
 
     </div>
 

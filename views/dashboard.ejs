@@ -12,17 +12,64 @@
     .container {
         padding: 2px 16px;
     }
+
+    td {
+        padding: 10px;
+        font-size: 20px;
+        border-bottom: 1px solid black;
+    }
 </style>
 <br />
 <br />
-<h3>Welcome
-    <%= user.fullname %>
-</h3>
-<img src="<%= user.avatar %> " alt="profile pic">
-<h4> Username: <%= user.username %> </h4>
-<h4> Email: <%= user.email %> </h4>
-<h4> ETH ID: <%= user.auth %> </h4>
-<h4> Account Balance: <%= user.balance %> </h4>
+<div class="container text-center">
+    <h3>
+        Profile
+    </h3>
+    <img src="<%= user.avatar %> " alt="profile pic">
+
+    <table style="margin-left: auto; margin-right: auto;">
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                <%= user.fullname  %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Username:
+            </td>
+            <td>
+                <%= user.username %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email:
+            </td>
+            <td>
+                <%= user.email %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ETH ID:
+            </td>
+            <td>
+                <%= user.auth %>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Account Balance:
+            </td>
+            <td>
+                <%= user.balance %>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <hr>
 
