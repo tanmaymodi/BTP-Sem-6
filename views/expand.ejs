@@ -88,8 +88,8 @@
     table,
     tr,
     td {
-        padding: 5px;
-        border: 1px solid black;
+        padding: 20px;
+        border-bottom: 1px solid black;
     }
 </style>
 
@@ -185,35 +185,33 @@
         <br><br><br>
         <div>
 
-            <h5>Transaction Updates</h5>
+            <h5 style="text-align: center;">Transaction Updates</h5>
 
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5">
+
+
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td>
                         <strong>Buyer's Username</strong>
-                        <hr>
-                        <strong>Buyer's Offered Price</strong>
-                        <hr>
-                        <strong>Buyer's Offer</strong>
-                        <hr>
-                        <strong>Status of Verifying Property Details via Org. Records</strong>
-                        <hr>
-                        <strong>Checking Sufficient Funds in Buyer's Account</strong>
-                        <hr>
-                        <strong>Transfering Ownership and Offered Amount</strong>
-                        <hr>
-                        <strong>Deal</strong>
-                        <hr>
-                    </div>
-                    <div class="col-md-2">
-
+                    </td>
+                    <td>
                         <%= blog.buyer %>
-                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Buyer's Offered Price</strong>
+                    </td>
+                    <td>
                         <%= blog.dealprice %>
-                        <hr>
-
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Buyer's Offer</strong>
+                    </td>
+                    <td>
                         <% if ( blog.step1 == false ) { %>
                         <span>
                             <span style="color: red;">Rejected</span>
@@ -223,45 +221,58 @@
                             <span style="color: green;">Accepted</span>
                         </span>
                         <% } %>
-                        <hr>
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Status of Verifying Property Details via Org. Records</strong>
+                    </td>
+                    <td>
                         <% if ( blog.step2 == true ) { %>
                         <span style="color: green;">Verified</span>
                         <% } else { %>
                         <span style="color: red;">Pending</span>
                         <% } %>
-                        <hr>
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Checking Sufficient Funds in Buyer's Account</strong>
+                    </td>
+                    <td>
                         <% if ( blog.step3 == true ) { %>
                         <span style="color: green;">Verified</span>
                         <% } else { %>
                         <span style="color: red;">Pending</span>
                         <% } %>
-                        <hr>
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Transfering Ownership and Offered Amount</strong>
+                    </td>
+                    <td>
                         <% if ( blog.step4 == true ) { %>
                         <span style="color: green;">Verified</span>
                         <% } else { %>
                         <span style="color: red;">Pending</span>
                         <% } %>
-                        <hr>
 
-
-
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Deal</strong>
+                    </td>
+                    <td>
                         <% if ( blog.deal == false ) { %>
                         <span style="color: red;">Pending</span>
                         <% } else { %>
                         <span style="color: green;">Done</span>
                         <% } %>
-                        <hr>
-                    </div>
-                    <div class="col-md"></div>
-
-
-                </div>
-            </div>
-
-
+                    </td>
+                </tr>
+            </table>
             <!-- <strong>Buyer's Username:</strong> <%= blog.buyer %>
                 <br>
                 <strong>Buyer's Offered Price:</strong> <%= blog.dealprice %>
