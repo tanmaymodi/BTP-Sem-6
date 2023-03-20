@@ -37,7 +37,7 @@ Real-Estate-Bit is a platform to showcase, sell, rent, buy a property. This plat
 
 ### Screenshots
 
-<img scr="https://github.com/tanmaymodi/Real-Estate-Bit/blob/main/public/login.png?raw=true" alt="log-in">
+<img src = "https://github.com/tanmaymodi/Real-Estate-Bit/blob/main/public/login.png?raw=true" alt="log-in">
 <img src = "https://github.com/tanmaymodi/Real-Estate-Bit/blob/main/public/menu.png?raw=true" alt="menu">
 <img src = "https://github.com/tanmaymodi/Real-Estate-Bit/blob/main/public/myProperties.png?raw=true" alt="my-properties">
 <img src = "https://github.com/tanmaymodi/Real-Estate-Bit/blob/main/public/propertyDetials1.png?raw=true" alt="prop-details-1">
